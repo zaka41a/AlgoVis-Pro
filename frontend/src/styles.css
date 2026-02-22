@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  --bg: #f5f8fc;
+  --text-main: #0f172a;
+  --text-soft: #334155;
+  --text-muted: #64748b;
+  --brand: #0ea5e9;
+  --brand-2: #0284c7;
+  --line: #dbe5f0;
+  --panel: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(900px 400px at 10% -10%, #e0f2fe, transparent 50%),
+    radial-gradient(900px 450px at 95% -20%, #ecfeff, transparent 50%), #f5f8fc;
+  color: var(--text-main);
+}
+
+.glass-panel {
+  border: 1px solid #d6e3ef;
+  background: var(--panel);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+.tag {
+  border-radius: 9999px;
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.quick-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  border: 1px solid #dbe5f0;
+  border-radius: 0.75rem;
+  background: #f8fbff;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.84rem;
+  color: var(--text-soft);
+}
+
+.quick-line strong {
+  color: #0f172a;
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+.btn-primary,
+.btn-ghost {
+  border-radius: 0.8rem;
+  padding: 0.62rem 0.95rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  border: 1px solid #0ea5e9;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.btn-ghost:hover {
+  background: #f1f5f9;
+}
+
+.metric-card {
+  border: 1px solid var(--line);
+  border-radius: 0.95rem;
+  background: #ffffff;
+  padding: 0.85rem;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.metric-value {
+  margin-top: 0.25rem;
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+.select-field {
+  margin-top: 0.35rem;
+  width: 100%;
+  border-radius: 0.65rem;
+  border: 1px solid #cbd5e1;
+  background: white;
+  padding: 0.5rem 0.7rem;
+  color: #0f172a;
+}
