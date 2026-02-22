@@ -1,0 +1,20 @@
+    *.js              linguist-vendored
+    *.mjs             linguist-vendored
+    *.cjs             linguist-vendored
+    *.jsx             linguist-vendored
+    *.ts              linguist-vendored
+    *.tsx             linguist-vendored
+    *.min.js          linguist-vendored
+    *.map             linguist-vendored
+
+    node_modules/**   linguist-vendored
+    dist/**           linguist-vendored
+    build/**          linguist-vendored
+    public/js/**      linguist-vendored
+    public/assets/**  linguist-vendored
+    assets/js/**      linguist-vendored
+    resources/js/**   linguist-vendored
+    vendor/**         linguist-vendored
+
+    *.min.css         linguist-vendored
+    public/css/**     linguist-vendored
