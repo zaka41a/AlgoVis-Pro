@@ -65,7 +65,16 @@ public class AlgorithmCatalogService {
                         "O(V + E)",
                         "O(V + E)",
                         "O(V + E)",
-                        "O(V)"));
+                        "O(V)"),
+                new AlgorithmDescriptorDto(
+                        "insertion-sort",
+                        "Insertion Sort",
+                        "sorting",
+                        "Build sorted array one element at a time by inserting each into its correct position.",
+                        "O(n)",
+                        "O(n^2)",
+                        "O(n^2)",
+                        "O(1)"));
     }
 
     public List<ScenarioDto> scenariosByAlgorithm(String algorithmId) {
@@ -94,6 +103,10 @@ public class AlgorithmCatalogService {
                     new ScenarioDto("dfs-1", "dfs-traversal", "Tree 7 Nodes", List.of(1, 2, 3, 4, 5, 6, 7)),
                     new ScenarioDto("dfs-2", "dfs-traversal", "Tree 8 Nodes", List.of(9, 8, 7, 6, 5, 4, 3, 2)),
                     new ScenarioDto("dfs-3", "dfs-traversal", "Tree 10 Nodes", List.of(3, 1, 4, 1, 5, 9, 2, 6, 5, 3)));
+            case "insertion-sort" -> List.of(
+                    new ScenarioDto("ins-1", "insertion-sort", "Random Small", List.of(5, 2, 8, 1, 9, 3, 7, 4)),
+                    new ScenarioDto("ins-2", "insertion-sort", "Nearly Sorted", List.of(1, 2, 4, 3, 5, 6, 8, 7)),
+                    new ScenarioDto("ins-3", "insertion-sort", "Reverse", List.of(8, 7, 6, 5, 4, 3, 2, 1)));
             default -> List.of();
         };
     }

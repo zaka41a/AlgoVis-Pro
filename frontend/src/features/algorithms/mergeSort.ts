@@ -28,13 +28,13 @@ export function buildMergeSortRun(input: number[]): AlgorithmRun {
     let j = 0;
     let k = left;
 
-    pushStep(4, `Merging segments [${left}, ${mid}] and [${mid + 1}, ${right}].`);
+    pushStep(5, `Merging segments [${left}, ${mid}] and [${mid + 1}, ${right}].`);
 
     while (i < leftPart.length && j < rightPart.length) {
-      pushStep(5, `Comparing ${leftPart[i]} and ${rightPart[j]}.`, [left + i, mid + 1 + j]);
+      pushStep(6, `Comparing ${leftPart[i]} and ${rightPart[j]}.`, [left + i, mid + 1 + j]);
       if (leftPart[i] <= rightPart[j]) {
         arr[k] = leftPart[i];
-        pushStep(6, `Writing ${leftPart[i]} at position ${k}.`, undefined, [k, k]);
+        pushStep(7, `Writing ${leftPart[i]} at position ${k}.`, undefined, [k, k]);
         i++;
       } else {
         arr[k] = rightPart[j];
@@ -53,7 +53,7 @@ export function buildMergeSortRun(input: number[]): AlgorithmRun {
 
     while (j < rightPart.length) {
       arr[k] = rightPart[j];
-      pushStep(9, `Copying remaining right value ${rightPart[j]} to position ${k}.`, undefined, [k, k]);
+      pushStep(8, `Copying remaining right value ${rightPart[j]} to position ${k}.`, undefined, [k, k]);
       j++;
       k++;
     }
@@ -68,13 +68,13 @@ export function buildMergeSortRun(input: number[]): AlgorithmRun {
     merge(left, mid, right);
   }
 
-  pushStep(1, "Initial array state.");
+  pushStep(0, "Initial array state.");
   mergeSort(0, arr.length - 1);
   steps.push({
     index: steps.length,
     array: clone(arr),
     sorted: arr.map((_, idx) => idx),
-    line: 10,
+    line: 9,
     explanation: "Sorting complete: the array is fully ordered."
   });
 
@@ -88,16 +88,16 @@ export function buildMergeSortRun(input: number[]): AlgorithmRun {
       space: "O(n)"
     },
     pseudocode: [
-      "mergeSort(left, right)",
-      "if left < right",
-      "  mid = floor((left+right)/2)",
-      "  mergeSort(left, mid)",
-      "  mergeSort(mid+1, right)",
-      "  merge(left, mid, right)",
-      "compare left[i] and right[j]",
-      "write smallest into arr[k]",
-      "copy remaining values",
-      "end"
+      "mergeSort(left, right)",         // 0
+      "if left < right",                // 1
+      "  mid = floor((left+right)/2)",  // 2
+      "  mergeSort(left, mid)",         // 3
+      "  mergeSort(mid+1, right)",      // 4
+      "  merge(left, mid, right)",      // 5
+      "compare left[i] and right[j]",  // 6
+      "write smallest into arr[k]",    // 7
+      "copy remaining values",         // 8
+      "end"                             // 9
     ],
     steps
   };

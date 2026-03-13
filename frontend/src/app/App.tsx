@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PageContainer } from "../components/layout/PageContainer";
 import { SectionTitle } from "../components/layout/SectionTitle";
 import { StepPlayer } from "../components/player/StepPlayer";
@@ -66,6 +66,16 @@ const fallbackAlgorithms: AlgorithmDescriptor[] = [
     averageCase: "O(V + E)",
     worstCase: "O(V + E)",
     spaceComplexity: "O(V)"
+  },
+  {
+    id: "insertion-sort",
+    name: "Insertion Sort",
+    category: "sorting",
+    description: "Build sorted array one element at a time by inserting each into its correct position.",
+    bestCase: "O(n)",
+    averageCase: "O(n^2)",
+    worstCase: "O(n^2)",
+    spaceComplexity: "O(1)"
   }
 ];
 
@@ -87,6 +97,9 @@ const fallbackScenarios: Record<string, Scenario[]> = {
   ],
   "dfs-traversal": [
     { id: "dfs-f-1", algorithmId: "dfs-traversal", label: "Tree 7 Nodes", values: [1, 2, 3, 4, 5, 6, 7] }
+  ],
+  "insertion-sort": [
+    { id: "ins-f-1", algorithmId: "insertion-sort", label: "Random Small", values: [5, 2, 8, 1, 9, 3, 7, 4] }
   ]
 };
 
@@ -95,6 +108,9 @@ export function App() {
   const [selectedAlgorithmId, setSelectedAlgorithmId] = useState("bubble-sort");
   const [scenarios, setScenarios] = useState<Scenario[]>(fallbackScenarios["bubble-sort"]);
   const [selectedScenarioId, setSelectedScenarioId] = useState(fallbackScenarios["bubble-sort"][0].id);
+  const [customInput, setCustomInput] = useState("");
+  const [customError, setCustomError] = useState("");
+  const customRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let alive = true;
@@ -146,10 +162,18 @@ export function App() {
     [scenarios, selectedScenarioId]
   );
 
+  function parseCustomInput(raw: string): number[] | null {
+    const parts = raw.split(/[,\s]+/).filter(Boolean).map(Number);
+    if (parts.length < 2 || parts.length > 12 || parts.some(isNaN)) return null;
+    return parts;
+  }
+
+  const parsedCustom = useMemo(() => (customInput ? parseCustomInput(customInput) : null), [customInput]);
+
   const run = useMemo(() => {
-    const values = selectedScenario?.values ?? [9, 3, 7, 1, 6, 2, 8, 4];
+    const values = parsedCustom ?? selectedScenario?.values ?? [9, 3, 7, 1, 6, 2, 8, 4];
     return buildRunForAlgorithm(selectedAlgorithm?.id ?? "bubble-sort", values);
-  }, [selectedAlgorithm, selectedScenario]);
+  }, [selectedAlgorithm, selectedScenario, parsedCustom]);
 
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text-main)]">
@@ -189,6 +213,10 @@ export function App() {
               <div className="quick-line">
                 <span>Worst Case</span>
                 <strong>{selectedAlgorithm?.worstCase}</strong>
+              </div>
+              <div className="quick-line">
+                <span>Space</span>
+                <strong>{selectedAlgorithm?.spaceComplexity}</strong>
               </div>
             </div>
           </aside>
@@ -230,7 +258,46 @@ export function App() {
             </label>
           </div>
 
-          <div className="mt-3 rounded-xl border border-[var(--line)] bg-white p-3 text-xs text-[var(--text-soft)]">
+          <div className="mt-3 rounded-xl border border-[var(--line)] bg-white p-3">
+            <label className="text-xs text-[var(--text-soft)]" htmlFor="custom-input">
+              Custom values
+              <div className="mt-1 flex gap-2">
+                <input
+                  id="custom-input"
+                  ref={customRef}
+                  type="text"
+                  placeholder="e.g. 5, 3, 8, 1, 9 (2–12 numbers)"
+                  className="select-field flex-1 font-mono text-xs"
+                  value={customInput}
+                  onChange={(e) => {
+                    setCustomInput(e.target.value);
+                    setCustomError("");
+                  }}
+                  onBlur={() => {
+                    if (customInput && !parsedCustom) {
+                      setCustomError("Enter 2–12 valid numbers separated by commas or spaces.");
+                    }
+                  }}
+                />
+                {customInput && (
+                  <button
+                    type="button"
+                    className="btn-ghost text-xs"
+                    onClick={() => { setCustomInput(""); setCustomError(""); }}
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              {customError && <p className="mt-1 text-[11px] text-rose-500">{customError}</p>}
+              {parsedCustom && (
+                <p className="mt-1 text-[11px] text-emerald-600">✓ Custom input active — {parsedCustom.length} values</p>
+              )}
+            </label>
+          </div>
+
+          <div className="mt-2 rounded-xl border border-[var(--line)] bg-white p-3 text-xs text-[var(--text-soft)]">
+            <span className="tag mr-2">{selectedAlgorithm?.category}</span>
             {selectedAlgorithm?.description} | Best {selectedAlgorithm?.bestCase} | Avg {selectedAlgorithm?.averageCase} |
             Worst {selectedAlgorithm?.worstCase}
           </div>

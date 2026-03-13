@@ -13,7 +13,7 @@ export function buildBubbleSortRun(input: number[]): AlgorithmRun {
     index: 0,
     array: cloneArray(arr),
     sorted: [],
-    line: 1,
+    line: 0,
     explanation: "Initial array state."
   });
 
@@ -24,7 +24,7 @@ export function buildBubbleSortRun(input: number[]): AlgorithmRun {
         array: cloneArray(arr),
         comparing: [j, j + 1],
         sorted: [...sorted],
-        line: 3,
+        line: 2,
         explanation: `Comparing elements at positions ${j} and ${j + 1}.`
       });
 
@@ -37,7 +37,7 @@ export function buildBubbleSortRun(input: number[]): AlgorithmRun {
           array: cloneArray(arr),
           swapping: [j, j + 1],
           sorted: [...sorted],
-          line: 4,
+          line: 3,
           explanation: `Swap executed: ${arr[j]} moves before ${arr[j + 1]}.`
         });
       }
@@ -48,7 +48,7 @@ export function buildBubbleSortRun(input: number[]): AlgorithmRun {
       index: steps.length,
       array: cloneArray(arr),
       sorted: [...sorted],
-      line: 6,
+      line: 4,
       explanation: `Element at position ${arr.length - 1 - i} is now fixed.`
     });
   }
@@ -58,7 +58,7 @@ export function buildBubbleSortRun(input: number[]): AlgorithmRun {
     index: steps.length,
     array: cloneArray(arr),
     sorted: [...sorted],
-    line: 7,
+    line: 5,
     explanation: "Sorting complete: the array is fully ordered."
   });
 
@@ -72,12 +72,12 @@ export function buildBubbleSortRun(input: number[]): AlgorithmRun {
       space: "O(1)"
     },
     pseudocode: [
-      "for i from 0 to n-2",
-      "  for j from 0 to n-i-2",
-      "    if arr[j] > arr[j+1]",
-      "      swap(arr[j], arr[j+1])",
-      "  mark arr[n-i-1] as sorted",
-      "end"
+      "for i from 0 to n-2",           // 0
+      "  for j from 0 to n-i-2",       // 1
+      "    if arr[j] > arr[j+1]",      // 2
+      "      swap(arr[j], arr[j+1])",  // 3
+      "  mark arr[n-i-1] as sorted",   // 4
+      "end"                             // 5
     ],
     steps
   };

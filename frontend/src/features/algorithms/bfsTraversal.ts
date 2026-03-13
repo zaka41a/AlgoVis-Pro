@@ -24,9 +24,9 @@ export function buildBfsRun(input: number[]): AlgorithmRun {
     index: 0,
     array: nodes,
     labels,
-    mode: "cells",
+    mode: "tree",
     sorted: [0],
-    line: 1,
+    line: 0,
     explanation: "Initialize BFS with root node N0."
   });
 
@@ -36,7 +36,7 @@ export function buildBfsRun(input: number[]): AlgorithmRun {
       index: steps.length,
       array: nodes,
       labels,
-      mode: "cells",
+      mode: "tree",
       comparing: [current, current],
       sorted: [...visited],
       line: 3,
@@ -51,7 +51,7 @@ export function buildBfsRun(input: number[]): AlgorithmRun {
           index: steps.length,
           array: nodes,
           labels,
-          mode: "cells",
+          mode: "tree",
           comparing: [neighbor, neighbor],
           sorted: [...visited],
           line: 5,
@@ -65,7 +65,7 @@ export function buildBfsRun(input: number[]): AlgorithmRun {
     index: steps.length,
     array: nodes,
     labels,
-    mode: "cells",
+    mode: "tree",
     sorted: [...visited],
     line: 6,
     explanation: "BFS traversal finished."
@@ -81,12 +81,13 @@ export function buildBfsRun(input: number[]): AlgorithmRun {
       space: "O(V)"
     },
     pseudocode: [
-      "enqueue(start)",
-      "mark start visited",
-      "while queue not empty",
-      "  node = dequeue()",
-      "  for each unvisited neighbor",
-      "    mark visited and enqueue"
+      "enqueue(start)",               // 0
+      "mark start visited",           // 1
+      "while queue not empty",        // 2
+      "  node = dequeue()",           // 3
+      "  for each unvisited neighbor",// 4
+      "    mark visited and enqueue", // 5
+      "end"                           // 6
     ],
     steps
   };

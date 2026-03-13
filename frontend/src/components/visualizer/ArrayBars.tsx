@@ -1,4 +1,5 @@
 import { ExecutionStep } from "../../types/execution";
+import { TreeVisualizer } from "./TreeVisualizer";
 
 interface ArrayBarsProps {
   step: ExecutionStep;
@@ -18,6 +19,10 @@ function barClass(index: number, step: ExecutionStep): string {
 }
 
 export function ArrayBars({ step }: ArrayBarsProps) {
+  if (step.mode === "tree") {
+    return <TreeVisualizer step={step} />;
+  }
+
   if (step.mode === "cells") {
     return (
       <div className="glass-panel rounded-2xl p-4 sm:p-5">

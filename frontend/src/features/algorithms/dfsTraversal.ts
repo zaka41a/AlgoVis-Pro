@@ -18,16 +18,26 @@ export function buildDfsRun(input: number[]): AlgorithmRun {
   const visited = new Set<number>();
   const steps: ExecutionStep[] = [];
 
+  steps.push({
+    index: 0,
+    array: nodes,
+    labels,
+    mode: "tree",
+    sorted: [],
+    line: 0,
+    explanation: "Initialize DFS from N0."
+  });
+
   function dfs(node: number) {
     visited.add(node);
     steps.push({
       index: steps.length,
       array: nodes,
       labels,
-      mode: "cells",
+      mode: "tree",
       comparing: [node, node],
       sorted: [...visited],
-      line: 3,
+      line: 1,
       explanation: `Visiting N${node} in depth-first order.`
     });
 
@@ -37,10 +47,10 @@ export function buildDfsRun(input: number[]): AlgorithmRun {
           index: steps.length,
           array: nodes,
           labels,
-          mode: "cells",
+          mode: "tree",
           comparing: [neighbor, neighbor],
           sorted: [...visited],
-          line: 4,
+          line: 3,
           explanation: `Recursing into N${neighbor}.`
         });
         dfs(neighbor);
@@ -48,25 +58,15 @@ export function buildDfsRun(input: number[]): AlgorithmRun {
     }
   }
 
-  steps.push({
-    index: 0,
-    array: nodes,
-    labels,
-    mode: "cells",
-    sorted: [],
-    line: 1,
-    explanation: "Initialize DFS from N0."
-  });
-
   dfs(0);
 
   steps.push({
     index: steps.length,
     array: nodes,
     labels,
-    mode: "cells",
+    mode: "tree",
     sorted: [...visited],
-    line: 5,
+    line: 4,
     explanation: "DFS traversal finished."
   });
 
@@ -80,11 +80,11 @@ export function buildDfsRun(input: number[]): AlgorithmRun {
       space: "O(V)"
     },
     pseudocode: [
-      "dfs(node)",
-      "mark node visited",
-      "for each neighbor",
-      "  if unvisited => dfs(neighbor)",
-      "return"
+      "dfs(node)",                      // 0
+      "mark node visited",              // 1
+      "for each neighbor",              // 2
+      "  if unvisited => dfs(neighbor)",// 3
+      "return"                          // 4
     ],
     steps
   };

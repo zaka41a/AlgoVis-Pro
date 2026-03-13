@@ -1,5 +1,6 @@
 import { AlgorithmRun } from "../../types/execution";
 import { buildBubbleSortRun } from "./bubbleSort";
+import { buildInsertionSortRun } from "./insertionSort";
 import { buildMergeSortRun } from "./mergeSort";
 import { buildQuickSortRun } from "./quickSort";
 import { buildKmpRun } from "./kmpSearch";
@@ -8,6 +9,8 @@ import { buildDfsRun } from "./dfsTraversal";
 
 export function buildRunForAlgorithm(algorithmId: string, input: number[]): AlgorithmRun {
   switch (algorithmId) {
+    case "insertion-sort":
+      return buildInsertionSortRun(input);
     case "merge-sort":
       return buildMergeSortRun(input);
     case "quick-sort":

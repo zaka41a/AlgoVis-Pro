@@ -25,7 +25,7 @@ export function buildKmpRun(input: number[]): AlgorithmRun {
     labels: text.split(""),
     mode: "cells",
     sorted: [],
-    line: 1,
+    line: 0,
     explanation: `Text: ${text}, pattern: ${pattern}.`
   });
 
@@ -54,7 +54,7 @@ export function buildKmpRun(input: number[]): AlgorithmRun {
       mode: "cells",
       comparing: [ti, ti],
       sorted: [...matched],
-      line: 5,
+      line: 3,
       explanation: `Comparing text[${ti}] = ${text[ti]} with pattern[${pj}] = ${pattern[pj]}.`
     });
 
@@ -70,7 +70,7 @@ export function buildKmpRun(input: number[]): AlgorithmRun {
           labels: text.split(""),
           mode: "cells",
           sorted: [...matched],
-          line: 8,
+          line: 4,
           explanation: `Pattern found at index ${ti - pj}.`
         });
         pj = lps[pj - 1];
@@ -88,7 +88,7 @@ export function buildKmpRun(input: number[]): AlgorithmRun {
     labels: text.split(""),
     mode: "cells",
     sorted: [...matched],
-    line: 9,
+    line: 7,
     explanation: "KMP search finished."
   });
 
@@ -102,14 +102,14 @@ export function buildKmpRun(input: number[]): AlgorithmRun {
       space: "O(m)"
     },
     pseudocode: [
-      "buildLPS(pattern)",
-      "i = 0, j = 0",
-      "while i < text.length",
-      "  if text[i] == pattern[j], i++, j++",
-      "  if j == pattern.length => match",
-      "  else if mismatch and j > 0 => j = lps[j-1]",
-      "  else if mismatch => i++",
-      "continue until end"
+      "buildLPS(pattern)",                          // 0
+      "i = 0, j = 0",                               // 1
+      "while i < text.length",                      // 2
+      "  if text[i] == pattern[j]: i++, j++",       // 3
+      "  if j == pattern.length: match found",      // 4
+      "  else if mismatch and j > 0: j = lps[j-1]", // 5
+      "  else if mismatch: i++",                    // 6
+      "end"                                         // 7
     ],
     steps
   };
