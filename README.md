@@ -83,11 +83,11 @@ Each algorithm ships with **3 preset scenarios** (random, edge case, worst case)
 │  App.tsx                            │
 │   ├── catalogApi  ──────────────────┼──► GET /api/algorithms
 │   ├── buildRunForAlgorithm()        │    GET /api/algorithms/{id}/scenarios
-│   ├── StepPlayer                   │
+│   ├── StepPlayer                    │
 │   │    ├── ArrayBars (bars)         │
 │   │    ├── ArrayBars (cells)        │
 │   │    └── TreeVisualizer (D3)      │
-│   └── Custom Input                 │
+│   └── Custom Input                  │
 └──────────────┬──────────────────────┘
                │ HTTP / JSON
                ▼
