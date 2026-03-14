@@ -12,6 +12,19 @@
   --brand-2: #0284c7;
   --line: #dbe5f0;
   --panel: #ffffff;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0c1220;
+  --text-main: #f1f5f9;
+  --text-soft: #cbd5e1;
+  --text-muted: #64748b;
+  --brand: #38bdf8;
+  --brand-2: #0ea5e9;
+  --line: #1e293b;
+  --panel: #111827;
+  color-scheme: dark;
 }
 
 * {
@@ -23,12 +36,23 @@ body {
   background: radial-gradient(900px 400px at 10% -10%, #e0f2fe, transparent 50%),
     radial-gradient(900px 450px at 95% -20%, #ecfeff, transparent 50%), #f5f8fc;
   color: var(--text-main);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background: radial-gradient(900px 400px at 10% -10%, #0c1a2e, transparent 50%),
+    radial-gradient(900px 450px at 95% -20%, #0a1628, transparent 50%), #0c1220;
 }
 
 .glass-panel {
-  border: 1px solid #d6e3ef;
+  border: 1px solid var(--line);
   background: var(--panel);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .glass-panel {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 .eyebrow {
@@ -53,12 +77,13 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 0.7rem;
-  border: 1px solid #dbe5f0;
+  border: 1px solid var(--line);
   border-radius: 0.75rem;
-  background: #f8fbff;
+  background: var(--bg);
   padding: 0.55rem 0.7rem;
   font-size: 0.84rem;
   color: var(--text-soft);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .quick-line strong {
@@ -87,13 +112,14 @@ body {
 }
 
 .btn-ghost {
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #334155;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text-soft);
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .btn-ghost:hover {
-  background: #f1f5f9;
+  background: var(--bg);
 }
 
 .metric-card {
@@ -122,10 +148,53 @@ body {
   margin-top: 0.35rem;
   width: 100%;
   border-radius: 0.65rem;
-  border: 1px solid #cbd5e1;
-  background: white;
+  border: 1px solid var(--line);
+  background: var(--panel);
   padding: 0.5rem 0.7rem;
-  color: #0f172a;
+  color: var(--text-main);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark mode toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+
+/* Dark mode overrides for white hard-coded backgrounds */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] [class*="bg-white"] {
+  background-color: var(--panel) !important;
+}
+
+[data-theme="dark"] .bg-slate-50 {
+  background-color: #0f172a !important;
+}
+
+[data-theme="dark"] .border-slate-200 {
+  border-color: var(--line) !important;
+}
+
+[data-theme="dark"] .text-slate-900 {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .text-slate-700 {
+  color: var(--text-soft) !important;
 }
 
 /* Disabled button states */

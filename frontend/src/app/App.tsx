@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import logo from "../assets/logo.svg";
 import { PageContainer } from "../components/layout/PageContainer";
 import { SectionTitle } from "../components/layout/SectionTitle";
 import { StepPlayer } from "../components/player/StepPlayer";
@@ -104,6 +105,7 @@ const fallbackScenarios: Record<string, Scenario[]> = {
 };
 
 export function App() {
+  const [dark, setDark] = useState(() => window.matchMedia("(prefers-color-scheme: dark)").matches);
   const [algorithms, setAlgorithms] = useState<AlgorithmDescriptor[]>(fallbackAlgorithms);
   const [selectedAlgorithmId, setSelectedAlgorithmId] = useState("bubble-sort");
   const [scenarios, setScenarios] = useState<Scenario[]>(fallbackScenarios["bubble-sort"]);
@@ -111,6 +113,10 @@ export function App() {
   const [customInput, setCustomInput] = useState("");
   const [customError, setCustomError] = useState("");
   const customRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  }, [dark]);
 
   useEffect(() => {
     let alive = true;
@@ -179,10 +185,32 @@ export function App() {
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text-main)]">
       <PageContainer>
         <header className="mb-8 flex items-center justify-between">
-          <div>
-            <p className="text-lg font-semibold tracking-tight">AlgoVis Pro</p>
-            <p className="text-xs text-[var(--text-muted)]">Interactive Algorithm Studio</p>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="AlgoVis Pro" className="h-10 w-10 rounded-xl shadow-sm" />
+            <div>
+              <p className="text-lg font-semibold tracking-tight">AlgoVis Pro</p>
+              <p className="text-xs text-[var(--text-muted)]">Interactive Algorithm Studio</p>
+            </div>
           </div>
+          <button
+            type="button"
+            className="theme-toggle"
+            aria-label="Toggle dark mode"
+            onClick={() => setDark((d) => !d)}
+          >
+            {dark ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            )}
+          </button>
         </header>
 
         <section className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">

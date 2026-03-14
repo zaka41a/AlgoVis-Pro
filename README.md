@@ -1,11 +1,10 @@
 <div align="center">
 
-<img src="docs/doc.png" alt="AlgoVis Pro" width="100%" />
+<img src="frontend/public/favicon.svg" width="120" alt="Algovis Pro Logo"/>
 
 <br />
-<br />
 
-# AlgoVis Pro
+# 🧮 AlgoVis Pro
 
 **Interactive Algorithm Visualization Platform**
 
