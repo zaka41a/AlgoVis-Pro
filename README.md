@@ -28,7 +28,7 @@
 
 <br />
 
-A full-stack educational platform for visualizing algorithms step by step —
+A full-stack educational platform for visualizing algorithms step by step 
 with live D3 tree rendering, synchronized pseudocode, keyboard navigation,
 custom input support, and a clean professional UI.
 
